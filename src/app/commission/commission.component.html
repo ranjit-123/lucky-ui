@@ -1,0 +1,129 @@
+<div *ngIf="isLoggedIn" class="content-wrapper">
+  <div class="card">
+    <div class="card-header border-transparent">
+      <h3 class="card-title">Retailer History</h3>
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+          <i class="fas fa-minus"></i>
+        </button>
+      </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body" style="display: block;">
+      <div class="row">
+            <div class="col-sm-3"> 
+              <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control"  placeholder="yyyy-mm-dd"
+                         name="fromDate" [(ngModel)]="fromDate" ngbDatepicker #d="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3"> 
+              <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control"  placeholder="yyyy-mm-dd"
+                         name="toDate" [(ngModel)]="toDate" ngbDatepicker #t="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="t.toggle()" type="button"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <select name="game_type" id="toUser" class="form-control" required [(ngModel)]="game_type">	
+                <option value="">Game Type</option>						
+               <option value="1">Dus Ka Dum</option>
+               <option value="4D">4D</option>              
+             </select>
+             </div>
+            <div class="col-sm-2">
+              <input id="typeahead-format" type="text" class="form-control" [(ngModel)]="toUser" />
+            </div>
+    
+            <div class="col-sm-2">
+              <button type="submit" (click)="rerender()" class="btn btn-primary">Submit</button>
+            </div>
+      </div>
+    </div>
+  </div>
+      <div class="card" id="showTable">
+          <div class="card-header border-transparent">
+            <h3 class="card-title">Retailer History</h3>
+      
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body table-responsive" style="display: block;">
+              <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table table-bordered table-striped dataTable dtr-inline">
+                <thead>
+                  <tr>
+                    <th>Draw Date</th>
+                    <th>UserName</th>
+                    <th>Time</th>
+                    <th>Play Points</th>
+                    <th>Winning</th>
+                    <th>Barcode</th>
+                    <th>Status</th>
+                    <th></th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="ticketHistory?.length != 0">
+                  <tr *ngFor="let ticket of ticketHistory" >
+                    <td>{{ ticket.date }}</td>
+                    <td>{{ ticket.userName }}</td>
+                    <td>{{ tConvert(ticket.drawTime) }}</td>
+                    <td>{{ ticket.purchasePoints}}</td>
+                    <td>{{ ticket.winning }}</td>
+                    <!-- <td>{{ getHexString(ticket.gameId) + 'G' + getHexString(ticket.ticketId)}}</td> -->
+                    <td>{{ticket.ticketId}}</td>
+                    <td> 
+                      <span [ngClass]="{'font-color-red': ticket.status === 'Canceled', 'font-color-green' : ticket.status === 'Active', 'font-color-blue' : ticket.status === 'Claimed' }">{{ticket.status}}</span> 
+                    </td>
+                    <td> <button class="btn btn-primary" style="padding: 2px;" (click)="viewTicket(ticket.ticketId)">View</button></td>
+                  </tr>
+                </tbody>
+                <tbody *ngIf="ticketHistory?.length === 0">
+                  <tr>
+                    <td colspan="8" class="no-data-available">No data!</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+        <div class="card" id="showTickedDetails" style="display: none;">
+          <div class="card-header border-transparent">
+            <h3 class="card-title">Beat Details</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body table-responsive" style="display: block;">
+            <div class="row">
+              <div class="col-sm-12"> 
+            <div *ngFor="let t of overlayResults;let j = index;" 
+            [ngClass]="{'ticket-number': t.winning === 0, 'ticket-number-winning' : t.winning > 0 }"
+                  style="border: 1px solid black; width: 10%;padding: 5px;text-align: center;">
+              <span>{{t.ticketNumber}}</span><br>
+              <span>{{t.quantity}}</span>
+            </div>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12"> 
+                <button (click)="openTable()" class="btn btn-primary">Back</button>           
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>

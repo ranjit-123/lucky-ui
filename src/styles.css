@@ -1,0 +1,60 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~font-awesome/css/font-awesome.css";
+.table .btn{
+    padding: 2px;
+    font-size: 10px;
+    margin: 1px;
+}
+
+.table td, .table th{
+    padding: 7px ​4px 7px 4px !important;
+}
+
+.table td, .table th, .main-header {
+    line-height: 14px;
+}
+
+body {
+    font-size: 14px !important;
+}
+
+.card-body {
+    padding: 0px 10px 5px 10px !important;
+}
+
+.dataTables_empty {
+    display: none;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+    padding: 0px !important;
+    margin-left: 0px !important;
+}
+
+.main-footer {
+    padding: 5px !important;
+    position: fixed;
+    bottom: 0;
+    border: 0px !important;
+    background: transparent !important;
+    right: 0;
+}
+
+.card-header {
+    padding: 10px 12px 10px 12px;
+}
+
+button.calendar, button.calendar:active {
+    width: 2.75rem;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAcCAYAAAAEN20fAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEUSURBVEiJ7ZQxToVAEIY/YCHGxN6XGOIpnpaEsBSeQC9ArZbm9TZ6ADyBNzAhQGGl8Riv4BLAWAgmkpBYkH1b8FWT2WK/zJ8ZJ4qiI6XUI3ANnGKWBnht2/ZBDRK3hgVGNsCd7/ui+JkEIrKtqurLpEWaphd933+IyI3LEIdpCYCiKD6HcuOa/nwOa0ScJEnk0BJg0UTUWJRl6RxCYEzEmomsIlPU3IPW+grIAbquy+q6fluy/28RIBeRMwDXdXMgXLj/B2uimRXpui4D9sBeRLKl+1N+L+t6RwbWrZliTTTr1oxYtzVWiTQAcRxvTX+eJMnlUDaO1vpZRO5NS0x48sIwfPc87xg4B04MCzQi8hIEwe4bl1DnFMCN2zsAAAAASUVORK5CYII=') !important;
+    background-repeat: no-repeat;
+    background-size: 23px;
+    background-position: center;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #0000;
+    border-color: #ff0000;
+    box-shadow: none;
+}

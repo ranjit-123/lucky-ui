@@ -1,0 +1,81 @@
+<div *ngIf="isLoggedIn" class="content-wrapper">
+<div class="card">
+  <div class="card-header border-transparent">
+    <h3 class="card-title">User Filter</h3>
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+        <i class="fas fa-minus"></i>
+      </button>
+      <button type="button" class="btn btn-tool" data-card-widget="remove">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body" style="display: block;">
+    <div class="row">
+          <div class="col-sm-5"> 
+            <input type="text" name="user_name" class="form-control"  placeholder="Enter User Name for search.." [(ngModel)]="userName">
+          </div>
+          <div class="col-sm-5">
+            <button type="submit" (click)="searchUser()" class="btn btn-primary">Submit</button>
+          </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+    <div class="card-header border-transparent">
+      <h3 class="card-title">Users</h3>
+
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+          <i class="fas fa-minus"></i>
+        </button>
+        <button type="button" class="btn btn-tool" data-card-widget="remove">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body" style="display: block;">
+      <div class="table-responsive-sm">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table table-bordered table-striped dataTable dtr-inline">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>User</th>
+              <th>User Name</th>
+              <th>User Type</th>
+              <th>Reporting</th>
+              <th>Commision</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="persons?.length != 0">
+            <tr *ngFor="let person of persons" >
+              <td>{{ person.userId }}</td>
+              <td><a [ngClass]="{'disabled' : person.type == '4'}" href="/#/edit-users?userId={{person.userId}}">{{ person.displayUserId }}</a></td>
+              <td>{{ person.userName }}</td>
+              <td>{{ person.type==='1'?'Retailer': person.type==='2' ? 'Distributor' : 'Manager'}}</td>
+              <td>{{ person.refernceUserId }}</td>
+              <td>{{ person.commition }}%</td>
+              <td>{{ person.status=='1'?'Active':'In-Active'}}</td>
+              <td>
+                <button [ngClass]="{'btn btn-primary': person.type === '2', 'hide-button' : person.type !== '2' }" (click)="viewNetToPay(person.userId)">View</button>
+                <button class="btn btn-primary" (click)="activateUser(person.userId)">Activate</button>
+                <button class="btn btn-danger" (click)="deActivateUser(person.userId)">De-Activate</button>
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="persons?.length === 0">
+            <tr>
+              <td colspan="3" class="no-data-available">No data!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  </div>

@@ -1,0 +1,36 @@
+<div class="card">
+    <div class="card-header border-transparent">
+        </div>    <div>       
+            <form class="form-inline">
+                
+                <div class="mb-3 mr-sm-3 mb-sm-0 position-relative form-group" style="margin-left: 23px;">
+                    <label for="examplePassword22" class="mr-sm-2">Date</label>
+                    <div class="input-group">
+                    <input class="form-control"  placeholder="yyyy-mm-dd"
+                    name="fromDate" [(ngModel)]="fromDate" ngbDatepicker #d="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                      </div></div>
+                </div>
+                <span id="datepicker1"></span>
+               <input type="submit" (click)="submitResultForm()" name="search" value="Search" class="btn btn-primary">
+               <input style="margin-left: 20px;" type="button" (click)="login()" name="Login" value="Login" class="btn btn-primary">
+            </form>
+               
+        </div>
+      
+      <div class="card-body" style="display: block;">
+        
+        <div class="row box" *ngFor="let ticketresult of overlayResults;">
+            <span style="background: gainsboro;
+            padding: 5px;
+            font-weight: bold;">{{ticketresult.date}} - {{tConvert(ticketresult.time)}}</span>
+           <div class="row rowfont" *ngFor="let tickets of ticketresult.tickets;let i = index;">
+          <div *ngFor="let t of tickets;let j = index;" class="color{{j}}" style="border: 1px solid black; width: 10%;padding: 5px;text-align: center;">
+               <span >{{t}}</span>
+           </div>
+       </div>
+           <br>
+       </div>
+    </div>
+    </div>

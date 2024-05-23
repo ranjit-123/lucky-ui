@@ -1,0 +1,27 @@
+.font-color-red {
+    color: red !important;
+}
+.font-color-green {
+    color: #28a745!important;
+}
+.font-color-blue {
+    color: blue !important;
+}
+.ticket-number-winning {
+    width: 9%;
+    min-width: 50px;
+    float: left;
+    background-color: green;
+    color: white;
+    margin: 0.5%;
+    border-radius: 4px;  
+}
+.ticket-number {
+    width: 9%;
+    min-width: 50px;
+    float: left;
+    background-color: darkblue;
+    color: white;
+    margin: 0.5%;
+    border-radius: 4px;
+}

@@ -1,0 +1,123 @@
+<div *ngIf="isLoggedIn" class="content-wrapper">
+  <div class="card">
+    <div class="card-header border-transparent">
+      <h3 class="card-title">Edit User</h3>
+    </div>
+    <div class="card-body" style="display: block;">
+    
+      <!-- /.card-header -->
+      <form [formGroup]="form" (ngSubmit)="updateUser()">
+      <div class="card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <!-- text input -->
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" formControlName="userName" class="form-control" placeholder="Enter Full Name...">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>User Type</label>
+                <select formControlName="type" id="user_type" onchange="getreporting_user();" class="form-control" required >
+                  <option value="">Select Type</option>								
+                  <option *ngIf="logedInUser.type == 2 || logedInUser.type == 4" value="1">Retailer</option>
+                  <option *ngIf="logedInUser.type == 4" value="2">Distributor</option>            
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <!-- text input -->
+              <div class="form-group">
+                <label>Reporting User</label>
+                <select *ngIf="logedInUser.type !== '3'" formControlName="refernceUserId" id="reporting_user_master_id" onchange="getreporting_user();" class="form-control" required="">
+                  <option value="">Select User</option>								
+                  <option value='{{logedInUser.userId}}'>
+                      {{logedInUser.displayUserId}} - ({{logedInUser.userName}})
+                  </option>   
+                  <option *ngFor="let users of rUsers" value='{{users.userId}}'>
+                    {{users.displayUserId}} - ({{users.userName}})
+                  </option>      
+                </select>
+                <select *ngIf="logedInUser.type === '3'" formControlName="refernceUserId" id="reporting_user_master_id" onchange="getreporting_user();" class="form-control" required="">
+                  <option value="">Select User</option>								
+                  <option value='{{logedInUser.userId}}'>
+                      {{logedInUser.displayUserId}} - ({{logedInUser.userName}})
+                  </option>   
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Comission (max 10.00)</label>
+                <input type="number" onkeyup="if(this.value>=10){ this.value = 10; return false;}" required mdInput formControlName="commition" class="form-control">
+              </div>
+              
+            </div>
+          </div>
+         <!-- <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Winning Distribution</label>
+                <input type="number" class="form-control" onkeyup="chk2();" onblur="chk2();" id="winning_distribution" formControlName="winingDistribution" placeholder="Winning Distribution" >
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Max Winning</label>
+                <input type="number" formControlName="maxwining" class="form-control" placeholder="Enter Full Name..." >
+              </div>
+            </div>
+          </div> -->
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label>Password</label>
+                <input type="text" class="form-control" id="password" formControlName="password">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label>Point Password</label>
+                <input type="text" formControlName="pointPassword" class="form-control">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label>Active Status</label>
+                <select formControlName="status" id="is_user_deleted" class="form-control" required>
+                  <option value="">Select Status</option>
+                  <option value="1">Active</option>
+                  <option value="0">Disable</option>
+                </select>
+              </div>
+            </div>
+          </div>
+         
+          <div class="row" *ngIf="logedInUser.type == 4" style="border-top: 1px solid #ccc;padding-top: 25px;margin-top: 25px;">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Winning Limit (up to)</label>
+                <input type="number" class="form-control" formControlName="winning_limit_upto" placeholder="Winning Limit (up to)">
+              </div>
+            </div>
+            <div class="col-sm-6" *ngIf="logedInUser.type == 4">
+
+             <label>Winning %</label>
+                <input type="text" formControlName="winning_percent" class="form-control">
+              </div>
+            </div>
+         
+          <div class="row">
+            <div class="col-sm-12">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+  
+  <!-- /.card-body -->
+</div></div>

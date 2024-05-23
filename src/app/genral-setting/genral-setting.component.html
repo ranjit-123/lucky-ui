@@ -1,0 +1,190 @@
+<div *ngIf="isLoggedIn" class="content-wrapper">
+  <div class="card">
+    <div class="card-header border-transparent">
+      <h3 class="card-title">General Setting</h3>
+    </div>
+    <div id="generalSetting" style="display: none;">
+      <div class="card-body">
+        <!-- /.card-header -->
+        <form role="form">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label>4D Winning</label>
+                  <input type="number" class="form-control" name="winning_distribution" [(ngModel)]="genwinning">
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label>1D Winning</label>
+                  <input type="number" class="form-control" name="winning_distribution_P" [(ngModel)]="pgenwinning">
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label>Result Type</label>
+                  <select name="result_type" id="result_type" class="form-control" required [(ngModel)]="resulttype">
+                    <option value="-1">Select Result Type</option>
+                    <option value="0">Low</option>
+                    <option value="1">High</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Notification Message</label>
+                  <textarea type="text" class="form-control" name="notification_message"
+                    [(ngModel)]="notificationmessage"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <button type="submit" (click)="updateGenSetting()" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- /.card-body -->
+      </div>
+
+      <div class="card-body" style="display: block;">
+        <!-- /.card-header -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label>Winning Number</label>
+                <input type="text" class="form-control" (change)="onChangeWinning($event, 0)"
+                  [(ngModel)]="winningNumber[0]">
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label>&nbsp;</label>
+                <input type="text" class="form-control" (change)="onChangeWinning($event, 1)"
+                  [(ngModel)]="winningNumber[1]">
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label>&nbsp;</label>
+                <input type="text" class="form-control" (change)="onChangeWinning($event, 2)"
+                  [(ngModel)]="winningNumber[2]">
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label>&nbsp;</label>
+                <input type="text" class="form-control" (change)="onChangeWinning($event, 3)"
+                  [(ngModel)]="winningNumber[3]">
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label>&nbsp;</label>
+                <input type="text" class="form-control" (change)="onChangeWinning($event, 4)"
+                  [(ngModel)]="winningNumber[4]">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label>1D Winning Number</label>
+                <input type="text" class="form-control" (change)="onChangeWinning($event, 0)"
+                  [(ngModel)]="winningNumber1D">
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label>3D Winning Number</label>
+                <input type="text" class="form-control" (change)="onChangeWinning($event, 0)"
+                  [(ngModel)]="winningNumber3D">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <button type="submit" (click)="updateWinningNumber()" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Winning Summary</h3>
+
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+          <table class="table table-hover text-nowrap">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Retailer Number</th>
+                <th>UserName</th>
+                <th>Ticker Number</th>
+                <th>Quantity</th>
+                <th>Multiplier</th>
+                <th>Winning Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ticket of data let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ ticket.retailarName }}</td>
+                <td>{{ ticket.userName }}</td>
+                <td>{{ ticket.ticketNumber }}</td>
+                <td>{{ ticket.quantity }}</td>
+                <td>{{ ticket.multiplier }}</td>
+                <td>{{ ticket.winningAmount }}</td>
+
+              </tr>
+              <tr>
+                <td colspan="6" class="no-data-available"><strong>Total Winning Amount</strong></td>
+                <td class="no-data-available"><strong>{{ totalWin }}</strong></td>
+              </tr>
+            </tbody>
+
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+  </div>
+  <div class="card">
+  <div class="card-body">
+    <div id="point-password">
+      <div class="row">
+        <div class="col-sm-12">
+          <div *ngIf="pointpassrequired" class="alert alert-danger" role="alert">
+            General Setting password required
+          </div>
+          <div *ngIf="pointpasswrong" class="alert alert-danger" role="alert">
+            Invalid General Setting password
+          </div>
+          <div class="form-group">
+            <label>General Setting Password</label>
+            <input type="text" class="form-control" name="pointpass" [(ngModel)]="pointPassword" autocomplete="off">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <button type="submit" (click)="checkGenSetting()" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>

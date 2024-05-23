@@ -1,0 +1,10 @@
+.font-color-red {
+    color: red !important;
+}
+.font-color-green {
+    color: #28a745!important;
+}
+
+.hide-row {
+    display: none;
+}

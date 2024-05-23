@@ -1,0 +1,94 @@
+<div *ngIf="isLoggedIn" class="content-wrapper">
+  <div class="card">
+    <div class="card-header border-transparent">
+      <h3 class="card-title">Add User</h3>
+    </div>
+    <div class="card-body" style="display: block;">
+    
+      <!-- /.card-header -->
+      <form role="form">
+      <div class="card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <!-- text input -->
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="user_name" class="form-control" placeholder="Enter Full Name..." [(ngModel)]="users.userName">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>User Type</label>
+                <select name="user_type" id="user_type" onchange="getreporting_user();" class="form-control" required [(ngModel)]="users.type">
+                  <option value="">Select Type</option>								
+                  <option *ngIf="logedInUser.type == 2" value="1">Retailer</option>
+                  <option *ngIf="logedInUser.type == 4 || logedInUser.type == 3" value="2">Distributor</option>
+                  <option *ngIf="logedInUser.type == 4" value="3">Supper Distributor</option>            
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <!-- text input -->
+              <div class="form-group">
+                <label>Reporting User</label>
+                <select name="reporting_user_master_id" id="reporting_user_master_id" onchange="getreporting_user();" class="form-control" required=""  [(ngModel)]="users.refernceUserId">
+                  <option value="">Select User</option>								
+                  <option value='{{logedInUser.userId}}'>
+                      {{logedInUser.displayUserId}} - ({{logedInUser.userName}})
+                  </option>       
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Comission (max 10.00)</label>
+                <input type="number" onkeyup="if(this.value>=10){ this.value = 10; return false;}" required mdInput name="commition" class="form-control" [(ngModel)]="users.commition">
+              </div>
+              
+            </div>
+          </div>
+          <!--<div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Winning Distribution</label>
+                <input type="number" class="form-control" onkeyup="chk2();" onblur="chk2();" id="winning_distribution" name="winning_distribution" placeholder="Winning Distribution" [(ngModel)]="users.winingDistribution">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Max Winning</label>
+                <input type="number" name="max_winning" class="form-control" placeholder="Enter Full Name..."  [(ngModel)]="users.maxwining">
+              </div>
+            </div>
+          </div> -->
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Bonus %</label>
+                <input type="number" class="form-control" id="bonus_percent" name="bonus_percent" placeholder="Bonus %" value="" [(ngModel)]="users.bonus_percent">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Active Status</label>
+                <select name="is_user_deleted" id="is_user_deleted" class="form-control" required [(ngModel)]="users.status">
+                  <option value="">Select Status</option>
+                  <option value="1">Active</option>
+                  <option value="0">Disable</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <button type="submit" (click)="saveUser()" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+  
+  <!-- /.card-body -->
+</div></div>

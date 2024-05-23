@@ -1,0 +1,67 @@
+<div *ngIf="isLoggedIn" class="content-wrapper">
+  <div class="card">
+    <div class="card-header border-transparent">
+      <h3 class="card-title">Add User</h3>
+    </div>
+  <div class="card-body" style="display: block;">
+    <!-- /.card-header -->
+    <form role="form">
+    <div class="card-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <!-- text input -->
+            <div class="form-group">
+              <label>Balance Points</label>
+              <input disabled type="text" name="balancepoints" class="form-control" [(ngModel)]="loginUser.balancepoints">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>User Type</label>
+              <select name="user_type" id="user_type" onchange="getreporting_user();" class="form-control" required [(ngModel)]="users_type">
+                <option value="">Select Type</option>								
+                <option value="1">Retailer</option>
+                <option value="2">Distributor</option>            
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <!-- text input -->
+            <div class="form-group">
+              <label>Credit/Debit User</label>
+              <select name="reporting_user_master_id" id="reporting_user_master_id" onchange="getreporting_user();" class="form-control" required  [(ngModel)]="point.touser">
+                <option value="">Select Type</option>								
+                <option value="1">Retailer</option>
+                <option value="2">Distributor</option>            
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Credit/Debit User Balance</label>
+              <input disabled type="text" class="form-control" [(ngModel)]="point.balance">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Transfer Points</label>
+              <input type="number" class="form-control" name="winning_distribution" [(ngModel)]="point.credit">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+          <button type="submit" (click)="addPoints()" class="btn btn-primary">Submit</button>
+        </div>
+        </div>
+      </div>
+     
+    </form>
+    
+    <!-- /.card-body -->
+  </div>
+</div>

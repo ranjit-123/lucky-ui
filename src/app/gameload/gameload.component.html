@@ -1,0 +1,76 @@
+<div *ngIf="isLoggedIn" class="content-wrapper">
+  <div class="card" id="generalSetting" style="display: none;">
+    <div class="card-header border-transparent">
+      <div class="row">
+        <div class="col-sm-3">
+          <h3 class="card-title">Game Load</h3>
+        </div>
+        <div class="col-sm-3">
+          <input type="radio" id="html" name="fav_language" value="4" [(ngModel)]="gameType">
+          <label for="html">4D Load</label><br>
+        </div>
+        <div class="col-sm-3">
+          <input type="radio" id="javascript" name="fav_language" value="1" [(ngModel)]="gameType" [checked]="isChecked">
+          <label for="javascript">1D Load</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body" style="display: block;">
+      <div class="row">
+        <div *ngFor="let element of data | keyvalue: keyDescOrder" class="col-sm-2">
+          <div class="card bg-light mb-3">
+            <div class="card-header"
+              [ngClass]="{'bg-success':element.value.isWinningNumber=='false', 'bg-danger':element.value.isWinningNumber=='true'}"
+              #container1>
+              <h6 class="card-text">{{element.key}}<input type="checkbox" data-val="element.key"
+                  [checked]="element.value.isWinningNumber=='true'" [value]="element.key"
+                  (change)="winningUpdate(container1,$event)" data-toggle="toggle" style="float:right"></h6>
+            </div>
+            <h6 class="card-text" style="border-bottom: solid 1px #cccccc;padding: 0px 6px 6px 6px;margin-bottom: 0px;">
+              Total :<h6 class="card-text" style="float:right;">{{element.value.total}}</h6>
+            </h6>
+            <div class="card-body" style="height: 100px;overflow-y: auto;scrollbar-width: thin;">
+              <div *ngFor="let card of element.value.resultList">
+                <h6 class="card-text">{{card.userName}} :<h6 class="card-text" style="float:right;">
+                    {{card.totalSalePoints}}</h6>
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- /.info-box -->
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card" id="point-password" style="display: block;">
+    <div class="card-body">
+      <div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div *ngIf="pointpassrequired" class="alert alert-danger" role="alert">
+              General Setting password required
+            </div>
+            <div *ngIf="pointpasswrong" class="alert alert-danger" role="alert">
+              Invalid General Setting password
+            </div>
+            <div class="form-group">
+              <label>General Setting Password</label>
+              <input type="text" class="form-control" name="pointpass" [(ngModel)]="pointPassword" autocomplete="off">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <button type="submit" (click)="checkGenSetting()" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

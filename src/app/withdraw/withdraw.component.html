@@ -1,0 +1,81 @@
+<div *ngIf="isLoggedIn" class="content-wrapper">
+  <div class="card">
+    <div class="card-header border-transparent">
+      <h3 class="card-title">Withdraw Points</h3>
+    </div>
+  <div class="card-body" style="display: block;">
+  <!-- /.card-header -->
+  <form role="form">
+  <div class="card-body">
+    <div id="pointTransaction" style="display: none;">
+      <div class="row">
+        <div class="col-sm-6">
+          <!-- text input -->
+          <div class="form-group">
+            <label>Balance Points</label>
+            <input disabled type="text" name="balancepoints" class="form-control" [(ngModel)]="balance">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Debit User</label>
+            <select name="reporting_user_master_id" id="reporting_user_master_id" (ngModelChange)="onUserChange($event)"  class="form-control" required  [(ngModel)]="point.touser">
+                  <option value="">Select User</option>								
+                  <option *ngFor="let users of rUsers" value='{{users.userId}}'>
+                      {{users.displayUserId}} - ({{users.userName}})
+                  </option>       
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Debit User Balance</label>
+            <input disabled type="text" class="form-control" value="{{userbalance.toFixed(2)}}" [(ngModel)]="userbalance">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Withdraw Points</label>
+            <input type="number" class="form-control" name="winning_distribution" [(ngModel)]="point.debit">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+        <button type="submit" (click)="withrawPoints()" class="btn btn-primary">Submit</button>
+      </div>
+      </div>
+    </div> 
+
+    <div id="point-password">
+      <div class="row">
+        <div class="col-sm-12">
+          <div *ngIf="pointpassrequired" class="alert alert-danger" role="alert">
+            Point password required
+          </div>
+          <div *ngIf="pointpasswrong" class="alert alert-danger" role="alert">
+            Invalid password
+          </div>
+          <div class="form-group">
+            <label>Point Password</label>
+            <input type="text" class="form-control" name="pointpass" [(ngModel)]="pointPassword">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <button type="submit" (click)="checkPointPassword()" class="btn btn-primary">Submit</button>     
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+    
+  </form>
+  
+  <!-- /.card-body -->
+</div></div>

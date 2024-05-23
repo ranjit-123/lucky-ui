@@ -1,0 +1,40 @@
+.rowfont {
+    font-size: 20px;
+}
+
+.box{
+    font-size: 18px;
+    margin: 10px;
+    border: 2px solid #dddddd;
+}
+
+.color0{
+    background-color: Lime;
+}
+.color1{
+    background-color: HotPink;
+}
+.color2{
+    background-color: Aqua;
+}
+.color3{
+    background-color: BurlyWood;
+}
+.color4{
+    background-color: LightCoral;
+}
+.color5{
+    background-color: LightSteelBlue;
+}
+.color6{
+    background-color: SpringGreen;
+}
+.color7{
+    background-color: Lavender;
+}
+.color8{
+    background-color: RosyBrown;
+}
+.color9{
+    background-color: SandyBrown;
+}
