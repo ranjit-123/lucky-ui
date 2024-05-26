@@ -33,7 +33,7 @@ export class CommissionComponent implements OnInit {
   fromDate!:NgbDateStruct;
   toDate!:NgbDateStruct;
   toUser = '';
-  game_type="4D";
+  game_type="1";
   ticketHistory!: TicketHistory[];
   loginUser!:User;
   isLoggedIn = false;
@@ -69,9 +69,9 @@ export class CommissionComponent implements OnInit {
     this.dtTrigger.unsubscribe();
   }
   formatter = (result: string) => result.toUpperCase();
-  urls='tickets/tickethistory/';
+  urls='ptickets/tickethistory/';
   rerender(): void {
-    this.urls='tickets/tickethistory/';
+    this.urls='ptickets/tickethistory/';
     if(this.game_type==="1" || this.game_type==="2"){
       this.urls='ptickets/tickethistory/';
     }
