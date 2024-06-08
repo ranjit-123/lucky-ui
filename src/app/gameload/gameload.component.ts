@@ -23,10 +23,14 @@ export class GameloadComponent implements OnInit,OnDestroy {
   intervalue:any;
   gameType=1;
   isChecked: boolean = true;
-
+  date:Date | undefined; 
   winningDisc: any;
 
-  constructor(private tokenStorageService: UserLogin, private sharedService: SharedServices, private activatedRoute: ActivatedRoute, public service: UsersService, private toastr: ToastrService) { }
+  constructor(private tokenStorageService: UserLogin, private sharedService: SharedServices, private activatedRoute: ActivatedRoute, public service: UsersService, private toastr: ToastrService) { 
+    setInterval(() => {
+      this.date = new Date()
+    }, 1000)
+  }
   ngOnDestroy(): void {
     clearInterval(this.intervalue);
   }
@@ -45,12 +49,12 @@ export class GameloadComponent implements OnInit,OnDestroy {
       if (document.getElementsByClassName("sidebar-open").length > 0)
         element.click();
     }
-   
+    this.getSaleNumbers();
    this.intervalue = setInterval(() => {
       this.getSaleNumbers();
-    }, 10000);
+    }, 5000);
 
-    
+   
   }
  
   getSaleNumbers() {
@@ -89,6 +93,7 @@ export class GameloadComponent implements OnInit,OnDestroy {
       .subscribe(
         response => {
           console.log(response);
+          this.getSaleNumbers();
         },
         error => {
           this.toastr.error("Error in number added/remove");
@@ -101,7 +106,7 @@ export class GameloadComponent implements OnInit,OnDestroy {
     this.pointpassrequired = false;
     this.pointpasswrong = false;
     if (this.pointPassword === '') {
-      this.pointpassrequired = true;
+      this.pointpassrequired = false;
       return;
     }
     this.sharedService.checkGeneralSettingPassword(this.loginUser.userId, this.pointPassword).subscribe(
@@ -115,5 +120,6 @@ export class GameloadComponent implements OnInit,OnDestroy {
         this.pointpasswrong = true;
       });
   }
+
 
 }

@@ -71,7 +71,7 @@ export class AddEditComponentComponent implements OnInit {
     password:[''],
     pointPassword:[''],
     winning_limit_upto: [''],
-    winning_percent:['']
+    winningPercent:['']
 });
 
 if(this.userId){
