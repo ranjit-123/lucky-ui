@@ -23,7 +23,7 @@ export class GenralSettingComponent implements OnInit {
   winningNumber3D:any;
   winningNumber:any=['','','','',''];
   notificationmessage:any;
-  resulttype:Number=-1;
+  resulttype:Number=0;
   data:any=[];
   totalWin:Number=0;
   ngOnInit(): void {
@@ -78,11 +78,11 @@ export class GenralSettingComponent implements OnInit {
     });
 
     console.log(this.winningNumber.toString());
-    
-    this.service.updateWinningNumber({userId:this.logedInUser.userId, winningNumber:this.winningNumber.toString(),winningNumber1D:this.winningNumber1D,winningNumber3D:this.winningNumber3D})
+    console.log(Number(this.winningNumber1D).toString());
+    this.service.updateWinningNumber({userId:this.logedInUser.userId, winningNumber:this.winningNumber.toString(),winningNumber1D:Number(this.winningNumber1D).toString(),winningNumber3D:this.winningNumber3D})
     .subscribe(
       response => {
-        console.log(response);
+        console.log(Number(this.winningNumber1D).toString());
         this.toastr.success("Update Successfully");
         this.submitted = true;
         this.getWinningPointsOfWinningNumber(this.winningNumber.toString());

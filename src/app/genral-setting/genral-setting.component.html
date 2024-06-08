@@ -15,20 +15,34 @@
                   <input type="number" class="form-control" name="winning_distribution" [(ngModel)]="genwinning">
                 </div>
               </div> -->
-              <div class="col-sm-6">
+              <div class="col-sm-4">
                 <div class="form-group">
                   <label>1D Winning</label>
                   <input type="number" class="form-control" name="winning_distribution_P" [(ngModel)]="pgenwinning">
                 </div>
               </div>
              
-              <div class="col-sm-6">
+              <div class="col-sm-4">
                 <div class="form-group">
                   <label>Result Type</label>
                   <select name="result_type" id="result_type" class="form-control" required [(ngModel)]="resulttype">
-                    <option value="-1">Select Result Type</option>
-                    <option value="0">Low</option>
-                    <option value="1">High</option>
+                    <option value="0">Select Result Type</option>
+                    <option value="40">Low</option>
+                    <option value="80">Medium</option>
+                    <option value="120">High</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Extra Result</label>
+                  <select name="pgenwinning_3" id="pgenwinning_3" class="form-control" required [(ngModel)]="pgenwinning_3">
+                    
+                    <option value="1">1X</option>
+                    <option value="2">2X</option>
+                    <option value="3">3X</option>
+                    <option value="4">4X</option>
+                    <option value="5">5X</option>
                   </select>
                 </div>
               </div>
